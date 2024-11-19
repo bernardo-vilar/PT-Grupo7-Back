@@ -21,6 +21,7 @@ model User {
   createdAt DateTime
   updatedAt DateTime
   comments Comment[]
+  avaliacoes Avaliacao[]
 }
 
 model Comment {
@@ -31,4 +32,32 @@ model Comment {
   conteudo String
   createdAt DateTime
   updatedAt DateTime
+}
+
+model Professor {
+  id Int @id @default(autoincrement())
+  nome String
+  departamento String
+  disciplinaID Int
+  createdAt DateTime
+  updatedAt DateTime
+}
+
+model Disciplina {
+  id Int @id @default(autoincrement())
+  nome String
+  ProfessoresID String
+  CreatedAt DateTime
+  UpdatedAt DateTime
+}
+
+model Avaliacao {
+  id Int @id @default(autoincrement())
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int
+  professorID String
+  disciplinaID String
+  conteudo String
+  CreatedAt DateTime
+  UpdatedAt DateTime
 }
