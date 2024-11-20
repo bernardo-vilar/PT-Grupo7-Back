@@ -1,4 +1,16 @@
-import { IsString, IsEmail, MinLength, IsOptional, IsDateString } from "class-validator";
+import { IsString, IsEmail, IsOptional, IsDateString, MinLength, Validate } from "class-validator";
+import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+
+@ValidatorConstraint({ async: false })
+export class BufferIsBuffer implements ValidatorConstraintInterface {
+    validate(value: any, args: ValidationArguments) {
+        return Buffer.isBuffer(value); 
+    }
+
+    defaultMessage(args: ValidationArguments) {
+        return 'The value must be a Buffer';
+    }
+}
 
 export class CreateUserDto {
     @IsString()
@@ -18,13 +30,12 @@ export class CreateUserDto {
     curso: string;
 
     @IsOptional()
-    foto?: string;
+    @Validate(BufferIsBuffer)
+    foto?: Buffer;
 
-    @IsOptional()
     @IsDateString()
-    createdAt?: string;
+    createdAt: string;  // Agora obrigatório
 
-    @IsOptional()
     @IsDateString()
-    updatedAt?: string;
+    updatedAt: string;  // Agora obrigatório
 }

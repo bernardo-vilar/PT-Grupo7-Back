@@ -17,7 +17,7 @@ model User {
   senha String
   departamento String
   curso String
-  foto Bytes
+  foto Bytes?
   createdAt DateTime
   updatedAt DateTime
   comments Comment[]

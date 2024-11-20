@@ -1,37 +1,43 @@
-import { IsString, IsEmail, MinLength, IsOptional, IsDateString } from "class-validator";
+import { IsString, IsEmail, IsOptional, IsDateString, Validate } from "class-validator";
+
+import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+
+@ValidatorConstraint({ async: false })
+export class BufferIsBuffer implements ValidatorConstraintInterface {
+  validate(value: any, args: ValidationArguments) {
+    return Buffer.isBuffer(value);
+  }
+
+  defaultMessage(args: ValidationArguments) {
+    return 'The value must be a Buffer';
+  }
+}
 
 export class UpdateUserDto {
-    @IsOptional()
-    @IsString()
-    nome: string;
+  @IsOptional()
+  @IsString()
+  nome: string;
 
+  @IsOptional()
+  @IsEmail()
+  email: string;
 
-    @IsOptional()
-    @IsEmail()
-    email: string;
+  @IsOptional()
+  @IsString()
+  departamento: string;
 
-    //TIREI O UPDATE DE SENHA
-    // @IsOptional()
-    // @IsString()
-    // @MinLength(6)
-    // senha: string;
+  @IsOptional()
+  @IsString()
+  curso: string;
 
-    @IsOptional()
-    @IsString()
-    departamento: string;
+  @IsOptional()
+  @Validate(BufferIsBuffer)
+  foto?: Buffer;
 
-    @IsOptional()
-    @IsString()
-    curso: string;
+  @IsOptional()
+  @IsDateString()
+  createdAt?: string;
 
-    @IsOptional()
-    foto?: string;
-
-    @IsOptional()
-    @IsDateString()
-    createdAt?: string;
-
-    @IsOptional()
-    @IsDateString()
-    updatedAt?: string;
+  @IsDateString()
+  updatedAt?: string;
 }
