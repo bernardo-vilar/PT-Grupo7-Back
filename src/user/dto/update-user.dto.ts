@@ -38,6 +38,7 @@ export class UpdateUserDto {
   @IsDateString()
   createdAt?: string;
 
+  @IsOptional()
   @IsDateString()
   updatedAt?: string;
 }

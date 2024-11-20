@@ -33,9 +33,11 @@ export class CreateUserDto {
     @Validate(BufferIsBuffer)
     foto?: Buffer;
 
+    @IsOptional()
     @IsDateString()
-    createdAt: string;  // Agora obrigatório
+    createdAt: string;
 
+    @IsOptional()
     @IsDateString()
-    updatedAt: string;  // Agora obrigatório
+    updatedAt: string;
 }
