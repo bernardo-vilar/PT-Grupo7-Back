@@ -1,6 +1,16 @@
-import { IsString, IsEmail, IsOptional, IsDateString, Validate } from "class-validator";
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  IsDateString,
+  Validate,
+} from 'class-validator';
 
-import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+  ValidationArguments,
+} from 'class-validator';
 
 @ValidatorConstraint({ async: false })
 export class BufferIsBuffer implements ValidatorConstraintInterface {

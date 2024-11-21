@@ -10,8 +10,8 @@ export class UserService {
   async create(userData: CreateUserDto) {
     const user = this.prisma.user.create({
       data: {
-        ...userData, 
-        createdAt: new Date().toISOString(), 
+        ...userData,
+        createdAt: new Date().toISOString(),
       },
     });
     return user;
