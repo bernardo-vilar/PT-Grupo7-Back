@@ -4,7 +4,7 @@ export class CreateCommentDto{
     authorId: number
 
     @IsString()
-    avaliacaoID: string
+    avaliacaoID: number
 
     @IsString()
     conteudo: string

@@ -6,7 +6,7 @@ export class UpdateCommentDto{
 
     @IsOptional()
     @IsString()
-    avaliacaoID: string
+    avaliacaoID: number
 
     @IsOptional()
     @IsString()
