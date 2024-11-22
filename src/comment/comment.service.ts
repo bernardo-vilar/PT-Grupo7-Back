@@ -29,7 +29,7 @@ export class CommentService {
     }
 
     async deleteComment(id: number) {
-        return await this.prisma.user.delete({
+        return await this.prisma.comment.delete({
             where: {
                 id: id,
             }
@@ -37,7 +37,7 @@ export class CommentService {
     }
 
     async update(id: number, data: UpdateCommentDto) {
-        return await this.prisma.user.update({
+        return await this.prisma.comment.update({
             where: {
                 id: id
             },
