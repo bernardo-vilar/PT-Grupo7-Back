@@ -1,9 +1,10 @@
 import { IsDateString, IsNumber, IsOptional, IsString } from "class-validator";
 export class CreateCommentDto{
+
     @IsNumber()
     authorId: number
 
-    @IsString()
+    @IsNumber()
     avaliacaoID: number
 
     @IsString()
