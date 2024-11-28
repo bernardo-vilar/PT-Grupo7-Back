@@ -1,16 +1,6 @@
-import {
-  IsString,
-  IsEmail,
-  IsOptional,
-  IsDateString,
-  Validate,
-} from 'class-validator';
+import { IsString, IsEmail, IsOptional, IsDateString, Validate } from 'class-validator';
 
-import {
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
-  ValidationArguments,
-} from 'class-validator';
+import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
 
 @ValidatorConstraint({ async: false })
 export class BufferIsBuffer implements ValidatorConstraintInterface {
@@ -44,11 +34,4 @@ export class UpdateUserDto {
   @Validate(BufferIsBuffer)
   foto?: Buffer;
 
-  @IsOptional()
-  @IsDateString()
-  createdAt?: string;
-
-  @IsOptional()
-  @IsDateString()
-  updatedAt?: string;
 }

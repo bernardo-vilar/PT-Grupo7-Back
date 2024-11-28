@@ -13,7 +13,4 @@ export class UpdateProfessorDto {
   @IsNumber()
   disciplinaID: number
 
-  @IsOptional()
-  @IsDateString()
-  updatedAt: string
 }

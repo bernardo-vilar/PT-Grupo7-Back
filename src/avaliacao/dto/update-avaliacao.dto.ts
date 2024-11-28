@@ -17,11 +17,5 @@ export class UpdateAvaliacaoDto {
   @IsString()
   conteudo?: string;
 
-  @IsOptional()
-  @IsDate()
-  createdAt?: Date;
-
-  @IsOptional()
-  @IsDate()
-  updatedAt?: Date;
+  
 }

@@ -5,18 +5,11 @@ export class UpdateCommentDto{
     authorId: number
 
     @IsOptional()
-    @IsString()
+    @IsNumber()
     avaliacaoID: number
 
     @IsOptional()
     @IsString()
     conteudo: string
 
-    @IsOptional()
-    @IsDateString()
-    createdAt: string
-
-    @IsOptional()
-    @IsDateString()
-    updatedAt: string
 };
