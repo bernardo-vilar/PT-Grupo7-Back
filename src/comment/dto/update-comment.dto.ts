@@ -12,4 +12,4 @@ export class UpdateCommentDto{
     @IsString()
     conteudo: string
 
-};
+}

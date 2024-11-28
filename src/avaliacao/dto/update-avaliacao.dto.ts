@@ -17,5 +17,4 @@ export class UpdateAvaliacaoDto {
   @IsString()
   conteudo?: string;
 
-  
 }
