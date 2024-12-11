@@ -1,5 +1,3 @@
-// src/professor/professor.service.ts
-
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProfessorDto } from './dto/create-professor.dto';
@@ -13,15 +11,23 @@ export class ProfessorService {
   async create(professorData: CreateProfessorDto) {
     return await this.prisma.professor.create({
       data: {
-        ...professorData,
-        createdAt: new Date().toISOString(), // Adiciona data de criação
+        nome: professorData.nome,
+        departamento: professorData.departamento,
+        disciplina: {
+          connect: { id: professorData.disciplinaID }, // Associa a disciplina pelo ID
+        },
+        createdAt: new Date().toISOString(),
       },
     });
   }
 
   // Método para listar todos os professores
   async findAll() {
-    return await this.prisma.professor.findMany();
+    return await this.prisma.professor.findMany({
+      include: {
+        disciplina: true, // Inclui a disciplina associada ao professor
+      },
+    });
   }
 
   // Método para buscar um professor específico pelo ID
@@ -29,6 +35,9 @@ export class ProfessorService {
     const professor = await this.prisma.professor.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        disciplina: true, // Inclui a disciplina associada ao professor
       },
     });
 
@@ -56,7 +65,7 @@ export class ProfessorService {
     // Verifica se o professor existe antes de atualizar
     await this.findProfessor(id);
 
-    // Verifica se foi passado um novo disciplinaID
+    // Define os dados de atualização
     const updateData: any = {
       ...data,
       updatedAt: new Date().toISOString(), // Atualiza a data de modificação
