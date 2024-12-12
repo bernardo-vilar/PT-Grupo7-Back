@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -20,19 +17,19 @@ model User {
   foto         Bytes?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-  comments     Comment[]   @relation("WrittenBy")
-  avaliacoes   Avaliacao[] @relation("WrittenBy")
+  comments     Comment[]   @relation("UserComments") // Relacionamento com comentários
+  avaliacoes   Avaliacao[] @relation("UserAvaliacoes") // Relacionamento com avaliações
 }
 
 model Comment {
   id          Int        @id @default(autoincrement())
-  author      User       @relation("WrittenBy", fields: [authorId], references: [id])
-  authorId    Int
-  avaliacao   Avaliacao  @relation(fields:[avaliacaoID], references: [id])
-  avaliacaoID Int        
   conteudo    String
-  createdAt   DateTime   @default(now()) 
-  updatedAt   DateTime   @updatedAt      
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  author      User       @relation("UserComments", fields: [authorId], references: [id])
+  authorId    Int
+  avaliacao   Avaliacao  @relation(fields: [avaliacaoID], references: [id])
+  avaliacaoID Int   
 }
 
 model Professor {
@@ -51,20 +48,20 @@ model Disciplina {
   nome          String
   createdAt     DateTime  @default(now())  
   updatedAt     DateTime  @updatedAt
-  professor     Professor[]
-  avaliacao     Avaliacao[]   
+  professores   Professor[]
+  avaliacoes    Avaliacao[]   
 }
 
 model Avaliacao {
   id           Int        @id @default(autoincrement())
-  author       User       @relation("WrittenBy", fields: [authorId], references: [id])
+  conteudo     String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt 
+  author       User       @relation("UserAvaliacoes", fields: [authorId], references: [id]) // Relacionamento com Autor (User)
   authorId     Int
   professor    Professor  @relation(fields: [professorID], references:[id])
   professorID  Int
   disciplina   Disciplina @relation(fields: [disciplinaID],references: [id])  
   disciplinaID Int
-  conteudo     String
-  createdAt    DateTime   @default(now()) 
-  updatedAt    DateTime   @updatedAt
   comments     Comment[]
 }
