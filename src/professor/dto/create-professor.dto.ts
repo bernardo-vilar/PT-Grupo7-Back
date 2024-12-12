@@ -1,20 +1,16 @@
-import { IsDateString, IsNumber, IsOptional, IsString, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+// src/professor/dto/create-professor.dto.ts
 
-export class CrateProfessorDto {
-    @IsString()
-    nome: string
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
-    @IsString()
-    departamento: string
+export class CreateProfessorDto {
+  @IsString()
+  @IsNotEmpty()
+  nome: string;
 
-    @IsNumber()
-    disciplinaID: number
+  @IsString()
+  @IsNotEmpty()
+  departamento: string;
 
-    @IsOptional()
-    @IsDateString()
-    createdAt: string
-
-    @IsOptional()
-    @IsDateString()
-    updatedAt: string
+  @IsInt()
+  disciplinaID: number; // ID da disciplina para associar
 }

@@ -1,16 +1,17 @@
-import { IsDateString, IsNumber, IsOptional, IsString, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+// src/professor/dto/update-professor.dto.ts
+
+import { IsInt, IsOptional, IsString } from 'class-validator';
 
 export class UpdateProfessorDto {
   @IsOptional()
   @IsString()
-  nome: string
+  nome?: string;  // Torna opcional para atualização
 
   @IsOptional()
   @IsString()
-  departamento: string
+  departamento?: string; // Torna opcional para atualização
   
   @IsOptional()
-  @IsNumber()
-  disciplinaID: number
-
+  @IsInt()
+  disciplinaID?: number;  // Torna opcional para atualização
 }

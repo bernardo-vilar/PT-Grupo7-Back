@@ -29,39 +29,39 @@ model Comment {
   author      User       @relation("UserComments", fields: [authorId], references: [id])
   authorId    Int
   avaliacao   Avaliacao  @relation(fields: [avaliacaoID], references: [id])
-  avaliacaoID Int   
+  avaliacaoID Int
 }
 
 model Professor {
   id           Int        @id @default(autoincrement())
   nome         String
   departamento String
-  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id])
+  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id]) // Relacionamento com Disciplina
   disciplinaID Int
-  createdAt    DateTime   @default(now())  
+  createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  avaliacao    Avaliacao[]       
+  avaliacoes   Avaliacao[] // Relacionamento com Avaliações
 }
 
 model Disciplina {
-  id            Int       @id @default(autoincrement())
-  nome          String
-  createdAt     DateTime  @default(now())  
-  updatedAt     DateTime  @updatedAt
-  professores   Professor[]
-  avaliacoes    Avaliacao[]   
+  id          Int         @id @default(autoincrement())
+  nome        String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  professores Professor[] // Relacionamento com Professores
+  avaliacoes  Avaliacao[] // Relacionamento com Avaliações
 }
 
 model Avaliacao {
   id           Int        @id @default(autoincrement())
   conteudo     String
   createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt 
+  updatedAt    DateTime   @updatedAt
   author       User       @relation("UserAvaliacoes", fields: [authorId], references: [id]) // Relacionamento com Autor (User)
   authorId     Int
-  professor    Professor  @relation(fields: [professorID], references:[id])
+  professor    Professor  @relation(fields: [professorID], references: [id]) // Relacionamento com Professor
   professorID  Int
-  disciplina   Disciplina @relation(fields: [disciplinaID],references: [id])  
+  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id]) // Relacionamento com Disciplina
   disciplinaID Int
-  comments     Comment[]
+  comments     Comment[] // Relacionamento com Comentários
 }
