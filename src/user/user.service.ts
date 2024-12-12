@@ -25,10 +25,6 @@ export class UserService {
     return await this.prisma.user.findUnique({ where: { id: id } });
   }
 
-  async findByEmail(email: string) {
-    return await this.prisma.user.findUnique({ where: { email: email } });
-  }
-
   async deleteUser(id: number) {
     return await this.prisma.user.delete({ where: { id: id } });
   }
