@@ -1,14 +1,14 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsNumber, IsString } from "class-validator";
 
 export class CreateAvaliacaoDto {
   @IsNumber()
   authorId: number;
 
-  @IsString()
-  professorName: string;
+  @IsNumber()
+  professorID: number;
 
-  @IsString()
-  disciplinaName: string;
+  @IsNumber()
+  disciplinaID: number;
 
   @IsString()
   conteudo: string;

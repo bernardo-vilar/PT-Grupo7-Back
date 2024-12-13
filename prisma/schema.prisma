@@ -34,7 +34,7 @@ model Comment {
 
 model Professor {
   id           Int        @id @default(autoincrement())
-  nome         String     @unique 
+  nome         String
   departamento String
   disciplina   Disciplina @relation(fields: [disciplinaID], references: [id]) // Relacionamento com Disciplina
   disciplinaID Int
@@ -45,7 +45,7 @@ model Professor {
 
 model Disciplina {
   id          Int         @id @default(autoincrement())
-  nome        String      @unique 
+  nome        String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   professores Professor[] // Relacionamento com Professores
