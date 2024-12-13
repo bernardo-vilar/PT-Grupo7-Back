@@ -28,6 +28,18 @@ export class AvaliacaoService {
     });
   }
 
+  async findByAuthor(authorId: number) {
+    return await this.prisma.avaliacao.findMany({
+      where: { authorId },
+      include: {
+        professor: true,  
+        disciplina: true, 
+        comments: true,   
+      },
+    });
+  }
+  
+
   async deleteAvaliacao(id: number) {
     return await this.prisma.avaliacao.delete({
       where: {

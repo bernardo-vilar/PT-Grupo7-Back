@@ -22,6 +22,12 @@ export class AvaliacaoController {
     return await this.avaliacaoService.findAvaliacao(id);
   }
 
+  @Get('user/:authorId')
+    async findByAuthor(@Param('authorId', ParseIntPipe) authorId: number) {
+    return await this.avaliacaoService.findByAuthor(authorId);
+  }
+
+
   @Delete(':id')
   async deleteAvaliacao(@Param('id', ParseIntPipe) id: number) {
     return await this.avaliacaoService.deleteAvaliacao(id);
