@@ -17,8 +17,8 @@ model User {
   foto         Bytes?
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
-  comments     Comment[]   @relation("UserComments") // Relacionamento com comentários
-  avaliacoes   Avaliacao[] @relation("UserAvaliacoes") // Relacionamento com avaliações
+  comments     Comment[]   @relation("UserComments")
+  avaliacoes   Avaliacao[] @relation("UserAvaliacoes")
 }
 
 model Comment {
@@ -26,9 +26,9 @@ model Comment {
   conteudo    String
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  author      User       @relation("UserComments", fields: [authorId], references: [id])
+  author      User       @relation("UserComments", fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int
-  avaliacao   Avaliacao  @relation(fields: [avaliacaoID], references: [id])
+  avaliacao   Avaliacao  @relation("AvaliacaoToComment", fields: [avaliacaoID], references: [id], onDelete: Cascade)
   avaliacaoID Int
 }
 
@@ -36,11 +36,11 @@ model Professor {
   id           Int        @id @default(autoincrement())
   nome         String
   departamento String
-  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id]) // Relacionamento com Disciplina
+  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id])
   disciplinaID Int
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  avaliacoes   Avaliacao[] // Relacionamento com Avaliações
+  avaliacoes   Avaliacao[]
 }
 
 model Disciplina {
@@ -48,8 +48,8 @@ model Disciplina {
   nome        String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-  professores Professor[] // Relacionamento com Professores
-  avaliacoes  Avaliacao[] // Relacionamento com Avaliações
+  professores Professor[]
+  avaliacoes  Avaliacao[]
 }
 
 model Avaliacao {
@@ -57,11 +57,11 @@ model Avaliacao {
   conteudo     String
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  author       User       @relation("UserAvaliacoes", fields: [authorId], references: [id]) // Relacionamento com Autor (User)
+  author       User       @relation("UserAvaliacoes", fields: [authorId], references: [id], onDelete: Cascade)
   authorId     Int
-  professor    Professor  @relation(fields: [professorID], references: [id]) // Relacionamento com Professor
+  professor    Professor  @relation(fields: [professorID], references: [id], onDelete: Cascade)
   professorID  Int
-  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id]) // Relacionamento com Disciplina
+  disciplina   Disciplina @relation(fields: [disciplinaID], references: [id], onDelete: Cascade)
   disciplinaID Int
-  comments     Comment[] // Relacionamento com Comentários
+  comments     Comment[]  @relation("AvaliacaoToComment") 
 }
