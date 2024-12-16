@@ -40,7 +40,7 @@ model Professor {
   disciplinaID Int
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  avaliacoes   Avaliacao[]
+  avaliacoes   Avaliacao[]  @relation("ProfessorAvaliacao")
 }
 
 model Disciplina {
@@ -59,8 +59,8 @@ model Avaliacao {
   updatedAt    DateTime   @updatedAt
   author       User       @relation("UserAvaliacoes", fields: [authorId], references: [id], onDelete: Cascade)
   authorId     Int
-  professor    Professor  @relation(fields: [professorID], references: [id], onDelete: Cascade)
-  professorID  Int
+  professor    Professor  @relation("ProfessorAvaliacao", fields: [professorID], references: [id], onDelete: Cascade)
+  professorID  Int @unique
   disciplina   Disciplina @relation(fields: [disciplinaID], references: [id], onDelete: Cascade)
   disciplinaID Int
   comments     Comment[]  @relation("AvaliacaoToComment") 

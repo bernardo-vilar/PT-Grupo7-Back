@@ -37,8 +37,10 @@ export class ProfessorService {
         id: id,
       },
       include: {
-        disciplina: true, // Inclui a disciplina associada ao professor
+        disciplina: true,
+        avaliacoes: true, 
       },
+      
     });
 
     if (!professor) {
